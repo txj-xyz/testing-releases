@@ -4,6 +4,7 @@
   "description": "Ability Tracker for RuneScape 3",
   "type": "commonjs",
   "main": "src/index.js",
+  "repository": "https://github.com/txj-xyz/testing-releases",
   "scripts": {
     "icon-rebuild": "node ./tools/generate-abilities-json.js",
     "startdev": "electron-forge start -- dev",
