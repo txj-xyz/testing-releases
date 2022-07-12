@@ -63,5 +63,7 @@ jobs:
           draft: false
           files: |
             out/**/*.dmg
+            out/**/RELEASES
+            out/**/*.nupkg
             out/**/*-Installer.exe
             out/**/*win32*.zip
