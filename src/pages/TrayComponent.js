@@ -15,7 +15,7 @@ module.exports = class Taskbar {
         windows.tray.reload = this.reload
         this.reload()
         uIOhook.start()
-        new Update()
+        // new Update()
     }
 
     registers() {
