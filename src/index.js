@@ -10,7 +10,7 @@ app
     // App ready event.
     .on('ready', _ => {
         if(process.platform !== 'darwin') {
-            const updateApp = require('electron');
+            const updateApp = require('update-electron-app');
             updateApp({ updateInterval: '1 hour', notifyUser: true });
         }
         new Taskbar();

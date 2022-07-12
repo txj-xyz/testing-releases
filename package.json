@@ -31,6 +31,7 @@
     "electron-squirrel-startup": "^1.0.0",
     "electron-store": "^8.0.2",
     "github-version-checker": "^2.3.0",
-    "uiohook-napi": "^1.2.0"
+    "uiohook-napi": "^1.2.0",
+    "update-electron-app": "^2.0.1"
   }
 }
