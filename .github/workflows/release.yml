@@ -1,0 +1,67 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  build:
+    name: Build (${{ matrix.os }} - ${{ matrix.arch }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macOS-latest, windows-2019 ]
+        arch: [ arm64, x64 ]
+        exclude:
+        - os: windows-2019
+          arch: arm64
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3.3.0
+        with:
+          node-version: 18
+
+      - name: Get Tracker Version
+        uses: nyaa8/package-version@v1
+
+      - name: Install
+        run: yarn --network-timeout 100000 || yarn --network-timeout 100000 || yarn --network-timeout 100000
+      
+      - name: Rebuild Windows Natives
+        if: |
+          matrix.os == 'windows-2019'
+        run: ./node_modules/.bin/electron-rebuild.cmd || .\node_modules\.bin\electron-rebuild.cmd
+        
+      - name: Make
+        run: yarn make --arch=${{ matrix.arch }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Rename Release arm64
+        if: |
+          matrix.os == 'macOS-latest' && matrix.arch == 'arm64'
+        run: mv out/**/RS3-Ability-Tracker-${{ env.PACKAGE_VERSION }}-${{ matrix.arch }}.dmg out/make/RS3-Ability-Tracker-${{ env.PACKAGE_VERSION }}-MacOS-M1.dmg
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Rename Release x64
+        if: |
+          matrix.os == 'macOS-latest' && matrix.arch == 'x64'
+        run: mv out/**/RS3-Ability-Tracker-${{ env.PACKAGE_VERSION }}-${{ matrix.arch }}.dmg out/make/RS3-Ability-Tracker-${{ env.PACKAGE_VERSION }}-MacOS-Intel.dmg
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          draft: false
+          files: |
+            out/**/*.dmg
+            out/**/*-Installer.exe
+            out/**/*win32*.zip

@@ -1,0 +1,11 @@
+node_modules/
+package-lock.json
+**/keybinds.json
+**/config.json
+out/
+.vscode/
+test.js
+!src/default/config.json
+!ability-window/assets/.custom/empty
+ability-window/assets/.custom/*.png
+ability-window/assets/.custom/*.jpg
