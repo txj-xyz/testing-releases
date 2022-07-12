@@ -1,6 +1,6 @@
 // Import dependencies.
 const [{ BrowserWindow, app }, { resolve }, { uIOhook }] = ['electron', 'path', 'uiohook-napi'].map(require);
-const updateApp = require('electron');
+
 
 // Anything extended off Manager or Window class is global.
 // Make globally usable variables.
@@ -9,7 +9,10 @@ for (const property in (manager = require(resolve(__dirname, './base/Manager.js'
 app
     // App ready event.
     .on('ready', _ => {
-        updateApp({ updateInterval: '1 hour', notifyUser: true });
+        if(process.platform !== 'darwin') {
+            const updateApp = require('electron');
+            updateApp({ updateInterval: '1 hour', notifyUser: true });
+        }
         new Taskbar();
     })
 
