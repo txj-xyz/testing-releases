@@ -1,5 +1,5 @@
 // Import dependencies.
-const [{ BrowserWindow, app }, { resolve }, { uIOhook }] = ['electron', 'path', 'uiohook-napi'].map(require);
+const [{ BrowserWindow, app }, { resolve }, { uIOhook }, updateApp] = ['electron', 'path', 'uiohook-napi', 'update-electron-app'].map(require);
 
 
 // Anything extended off Manager or Window class is global.
@@ -10,7 +10,6 @@ app
     // App ready event.
     .on('ready', _ => {
         if(process.platform !== 'darwin') {
-            const updateApp = require('update-electron-app');
             updateApp({ updateInterval: '1 hour', notifyUser: true });
         }
         new Taskbar();
