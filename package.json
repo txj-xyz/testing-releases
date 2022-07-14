@@ -77,10 +77,6 @@
                 },
                 {
                     "name": "@electron-forge/maker-zip"
-                },
-                {
-                    "name": "@electron-forge/maker-pkg",
-                    "scripts": "./scripts/darwin-test.sh"
                 }
             ]
         }

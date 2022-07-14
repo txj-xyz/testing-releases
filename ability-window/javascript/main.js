@@ -79,3 +79,24 @@ ipc.on('fromBars', (event, param) => {
 
     }
 })
+
+ipc.on('configManager', (event, param) => {
+    const button = document.querySelector('div#config');
+    if(param.type === 'export'){
+        button.innerHTML = 'Copied Config to Clipboard!'
+        button.style.background = 'var(--green)'
+
+        setTimeout(() => {
+            button.innerHTML = 'Manage Config'
+            button.style.background = ''
+        }, 2000);
+    }
+    else if(param.type === 'import'){
+        button.innerHTML = 'Loaded Config!'
+        button.style.background = 'var(--green)'
+        setTimeout(() => {
+            button.innerHTML = 'Manage Config'
+            button.style.background = ''
+        }, 2000);
+    }
+})

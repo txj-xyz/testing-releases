@@ -11,20 +11,16 @@ main div[buttons] div {
     background: var(--blue);
 }
 
-main div[warning] {
-    font-size: 22px;
-    font-weight: bold;
-    color: var(--red);
-}
-
 main div[content] {
     font-size: 18px;
     font-weight: bold;
 }
 
-main div[confirm] {
-    background: var(--green) !important;
+main div[failed] {
+    margin: -5px 0 -5px 0;
+    color: var(--red) !important;
 }
-main div[deny] {
-    background: var(--red) !important;
+
+div.disable {
+    display: none;
 }

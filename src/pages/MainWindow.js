@@ -13,6 +13,7 @@ module.exports = class Main extends Window {
         if (param === 'quit') quitHandler();
         else if (param === 'ability' && !windows.ability) new Ability();
         else if (param === 'ability' && windows.ability) windows.ability.close();
+        else if (param === 'config') new Config();
         else new global[param.slice(0, 1).toUpperCase() + param.slice(1)]();
         return (event.returnValue = null);
     };

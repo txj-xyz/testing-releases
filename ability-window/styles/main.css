@@ -82,3 +82,7 @@ div[buttons] > #import {
 div[buttons] > #export {
     width: 50%
 }
+
+div#config {
+    transition-duration: 500ms;
+}
